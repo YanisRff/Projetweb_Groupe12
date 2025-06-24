@@ -1,0 +1,40 @@
+version: '3.8'
+
+networks:
+  website-net:
+
+volumes:
+  db-data:
+
+services:
+  website:
+    build: . # This correctly points to the Dockerfile now in the current directory (project root)
+    container_name: gulf_traject_web
+    networks:
+      - website-net
+    volumes:
+      # Mount your local project directory (which is the current directory where compose.yaml is)
+      # into the container's web root.
+      - .:/var/www/html # Changed from absolute path to relative for portability
+      # SSH key mount (optional). REMEMBER TO UPDATE THE HOST PATH
+      - /path/to/your/id_rsa.pub:/root/.ssh/authorized_keys # <--- UPDATE THIS PATH
+    ports:
+      - "8080:80"
+      - "2222:22"
+    depends_on:
+      - db
+
+  db:
+    image: postgres:latest
+    container_name: gulf_traject_db
+    restart: always
+    environment:
+      - POSTGRES_USER=yanis
+      - POSTGRES_PASSWORD=a
+      - POSTGRES_DB=db
+    networks:
+      - website-net
+    volumes:
+      - db-data:/var/lib/postgresql/data
+    ports:
+      - "5432:5432"
