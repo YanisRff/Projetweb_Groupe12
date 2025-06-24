@@ -17,6 +17,9 @@
     <main>
       <div id="form">
         <form onSubmit="sendData(event)" method="post">
+                    <div class="tittle-3">
+                        <p>Veuillez rentrer vos nouvelles données</p>
+                    </div>
                     <div class="mb-3">
                         <label for="MMSI" class="create-div">MMSI </label>
                         <input type="number" class="form-control" id="MMSI" name="MMSI" required>
