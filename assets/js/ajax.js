@@ -10,41 +10,50 @@
 // \param data The data associated with the request.
 // console.log("utils.js loaded");
 
-
 function ajaxRequest(type, url, callback, data = null)
 {
-  let xhr;
-  // Create XML HTTP request.
-  xhr = new XMLHttpRequest();
-  if (type == 'GET' && data != null)
+  let xhr = new XMLHttpRequest();
+
+  if (type === 'GET' && data != null)
     url += '?' + data;
+
   xhr.open(type, url);
   xhr.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded');
 
-  // Add the onload function.
-  xhr.onload = () =>
-  {
+  xhr.onload = () => {
+    console.log("Réponse du serveur :", xhr.responseText);
 
-    console.log(xhr.responseText);
-    switch (xhr.status)
-    {
+    switch (xhr.status) {
       case 200:
       case 201:
-        callback(JSON.parse(xhr.responseText));
+        // Vérifie que la réponse n'est pas vide avant de parser
+        if (xhr.responseText.trim() !== "") {
+          try {
+            const json = JSON.parse(xhr.responseText);
+            callback(json);
+          } catch (e) {
+            console.error("Erreur de parsing JSON :", e);
+          }
+        } else {
+          console.warn("Réponse vide du serveur.");
+          callback(null); // ou [] / {} selon ton besoin
+        }
         break;
+
       case 404:
         alert("Erreur 404: Page non trouvée");
         break;
+
       case 500:
         alert("Erreur 500: Erreur interne du serveur");
         break;
+
       default:
         alert("Erreur: " + xhr.status);
         break;
     }
   };
 
-  // Send XML HTTP request.
   xhr.send(data);
 }
 

@@ -16,10 +16,14 @@ if (!$pdo) {
 
 $router = new Router();
 
-
-// Exemple
-
-$router->POST('/user-action', ["email", "password"], function($email, $password){
+$router->GET('/test', [], function(){
   global $pdo;
-  login($pdo, $email, $password);
+  getTable($pdo);
 });
+
+$router->POST('/addData', ['mmsi', 'horodatage', 'latitude', 'longitude','sog','cog','heading','name','length','width','draft','status'], function($mmsi, $horodatage, $latitude, $longitude, $sog, $cog, $heading, $name, $length, $width, $draft, $status){
+  global $pdo;
+  saveData($pdo, $mmsi, $horodatage, $latitude, $longitude, $sog, $cog, $heading, $name, $length, $width, $draft, $status);
+});
+
+$router->run();
