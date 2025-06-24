@@ -18,6 +18,9 @@ switch ($path) {
     case '/carte':
         require 'src/pages/carte.php';
         break;
+    case '/cluster':
+        require 'src/pages/cluster.php';
+        break;
     default:
         http_response_code(404);
         require 'src/pages/404.php';

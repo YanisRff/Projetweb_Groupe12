@@ -26,4 +26,14 @@ $router->POST('/addData', ['mmsi', 'horodatage', 'latitude', 'longitude','sog','
   saveData($pdo, $mmsi, $horodatage, $latitude, $longitude, $sog, $cog, $heading, $name, $length, $width, $draft, $status);
 });
 
+$router->GET('/carte', [], function(){
+  global $pdo;
+  getAll($pdo);
+});
+
+$router->GET('/cluster', [], function(){
+  global $pdo;
+  clusterAll($pdo);
+});
+
 $router->run();
