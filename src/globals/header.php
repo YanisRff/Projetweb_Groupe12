@@ -9,5 +9,6 @@
         <div id="linkTo">
             <a href="/">Accueil</a>
             <a href="/addData">Ajout</a>
+            <a href="/carte">Carte</a>
         </div>
 </header>

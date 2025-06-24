@@ -15,6 +15,9 @@ switch ($path) {
     case '/addData':
         require 'src/pages/add.php';
         break;
+    case '/carte':
+        require 'src/pages/carte.php';
+        break;
     default:
         http_response_code(404);
         require 'src/pages/404.php';

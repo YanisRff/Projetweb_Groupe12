@@ -12,7 +12,7 @@ function sendData(event){
   var length = document.getElementById('length').value;
   var width = document.getElementById('width').value;
   var draft = document.getElementById('draft').value;
-  var status = document.getElementById('status').value;
+  var status = parseInt(document.getElementById('status').value, 10);
   
   let data = 'mmsi='+MMSI+'&horodatage='+horodatage+'&latitude='+latitude+'&longitude='+longitude+'&sog='+sog+'&cog='+cog+'&heading='+heading+'&name='+name+'&length='+length+'&width='+width+'&draft='+draft+'&status='+status
   ajaxRequest('POST','./php/request.php/addData', function(data){

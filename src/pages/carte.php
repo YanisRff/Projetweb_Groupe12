@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    
+    <title>GulfTraject - Ajout d'un navire</title>
+
+    <link rel="stylesheet" href="assets/css/style.css">
+    <script src="assets/js/ajax.js"></script>
+    <script src="assets/js/carte.js"></script>
+</head>
+<body>
+  <?php
+    include("src/globals/header.php");
+  ?>
+  <div id="container">
+    <main>
+
+    <div id="fullMap"></div>
+    
+    <div id="table"></div>
+
+    </main>
+  </div>
+</body>
+</html>
+
+
