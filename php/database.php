@@ -89,10 +89,70 @@ function saveData($pdo, $mmsi, $horodatage, $latitude, $longitude, $sog, $cog, $
     }
 }
 
+function getAll($pdo){
+  $statement = $pdo->prepare('SELECT * FROM Boat INNER JOIN Position ON Boat.MMSI = Position.MMSI ORDER BY Boat.MMSI, Position.basedatetime;');
+  $statement -> execute();
+  $result = $statement->fetchAll(PDO::FETCH_ASSOC);
+  if(!empty($result)){
+    Response::HTTP200($result);
+    exit;
+  } else{
+    Response::HTTP404(['error' => 'No data found']);
+    exit;
+  }
+}
+
+
+function clusterAll($pdo){
+  $statement = $pdo->prepare('SELECT * FROM Boat INNER JOIN Position ON Boat.MMSI = Position.MMSI ORDER BY Boat.MMSI, Position.basedatetime;');
+  $statement -> execute();
+  $result = $statement->fetchAll(PDO::FETCH_ASSOC);
+  if(!empty($result)){
+
+    $modifiedResult = [];
+    foreach ($result as $row) {
+      $pythonScript = realpath(__DIR__ . '/../assets/models/script_BC1_final.py');
+      $latitude = escapeshellarg($row['latitude']);
+      $longitude = escapeshellarg($row['longitude']);
+      $sog = escapeshellarg($row['sog']);
+      $cog = escapeshellarg($row['cog']);
+      $heading = escapeshellarg($row['heading']);
+      $command = "python " . $pythonScript . " --LAT " . $latitude . " --LON " . $longitude . " --SOG " . $sog . " --COG " . $cog . " --Heading " . $heading;
+      $output = shell_exec($command . ' 2>&1');
+      $clusterValue = null;
+      if (is_string($output) && trim($output) !== '') {
+        if (preg_match('/>>> Cluster prédit pour ce navire : (\d+)/', $output, $matches)) {
+          $clusterValue = (int)$matches[1];
+        } else {
+          error_log("Python script output did not contain expected cluster line for MMSI {$row['mmsi']}:\n" . $output);
+          $clusterValue = $output;
+        }
+      } else {
+        error_log("Python script returned empty or non-string output for MMSI {$row['mmsi']}: " . var_export($output, true));
+        $clusterValue = 'Error: No output';
+      }
+      $row['cluster'] = $clusterValue;
+      $modifiedResult[] = $row;
+    }
+    Response::HTTP200($modifiedResult);
+    exit;
+  } else{
+    Response::HTTP404(['error' => 'No data found']);
+    exit;
+  }
+}
+
+
+
 function getUser($db, $id){
     $query = $db->prepare('SELECT * FROM Users WHERE id_user = :id_user');
     $query->execute(array(':id_user' => $id));
     $result = $query->fetch(PDO::FETCH_ASSOC);
-
-    return $result;
+    if(!empty($result)){
+      Response::HTTP200($result);
+      exit;
+    } else{
+      Response::HTTP404(['error' => 'No data found']);
+      exit;
+    }
 }

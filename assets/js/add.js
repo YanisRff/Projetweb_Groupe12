@@ -1,6 +1,8 @@
 function sendData(event){
   event.preventDefault();
 
+  // I have to add to change the  error message of status
+
   var MMSI = document.getElementById('MMSI').value;
   var horodatage = document.getElementById('horodatage').value;
   var latitude = document.getElementById('latitude').value;
