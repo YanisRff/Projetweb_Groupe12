@@ -3,7 +3,7 @@ document.addEventListener('DOMContentLoaded', function() {
 });
 
 function printMap() {
-    ajaxRequest('GET', './php/request.php/carte', function(rawData) {
+    ajaxRequest('GET', './php/request.php/cluster', function(rawData) {
         const clusterColors = {};
 
         const boatDataGrouped = rawData.reduce((acc, point) => {
@@ -14,7 +14,6 @@ function printMap() {
             point.length = parseFloat(point.length);
             point.width = parseFloat(point.width);
             point.draft = parseFloat(point.draft);
-            point.cluster = parseFloat(point.cluster);
 
             if (!clusterColors[point.cluster]) {
                 clusterColors[point.cluster] = '#' + Math.floor(Math.random() * 16777215).toString(16).padStart(6, '0');

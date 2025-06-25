@@ -4,9 +4,9 @@ import pandas as pd
 
 if __name__ == '__main__':
     # Chargement du modèle et du scaler
-    with open('model_1.pkl', 'rb') as f:
+    with open('../assets/models/model_1.pkl', 'rb') as f:
         model = pickle.load(f)
-    with open('scale_1.pkl', 'rb') as f:
+    with open('../assets/models/scale_1.pkl', 'rb') as f:
         scaler = pickle.load(f)
 
     # Lecture des paramètres d'entrée

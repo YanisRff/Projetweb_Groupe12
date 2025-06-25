@@ -10,7 +10,7 @@ RUN a2ensite 000-default.conf
 
 RUN docker-php-ext-install pgsql pdo_pgsql
 
-RUN apt install -y python3-pandas
+RUN pip install --break-system-packages pandas scikit-learn numpy
 
 COPY . /var/www/html/
 
