@@ -155,8 +155,9 @@ function getBoat($pdo, $MMSI){
   }
 }
 
-function getNextPred($pdo, $latitude, $longitude, $sog, $cog, $heading, $type, $length, $width, $draft, $cargo)
-  $pythonScript = realpath(__DIR__ . '/../assets/models/script_BC3_final.py')
+function getNextPred($pdo, $latitude, $longitude, $sog, $cog, $heading, $type, $length, $width, $draft, $cargo){
+  $pythonScript = realpath(__DIR__ . '/../assets/models/script_BC3_final.py');
+}
 
 function clusterAll($pdo){
   $statement = $pdo->prepare('SELECT * FROM Boat INNER JOIN Position ON Boat.MMSI = Position.MMSI ORDER BY Boat.MMSI, Position.basedatetime;');
