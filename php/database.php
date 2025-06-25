@@ -102,6 +102,61 @@ function getAll($pdo){
   }
 }
 
+function getAllMMSI($pdo){
+  $statement = $pdo->prepare('SELECT MMSI FROM Boat ORDER BY MMSI');
+  $statement->execute();
+  $result = $statement->fetchAll(PDO::FETCH_ASSOC);
+  if(!empty($result)){
+    Response::HTTP200($result);
+    exit;
+  } else{
+    Response::HTTP404(['error' => 'No data found']);
+    exit;
+  }
+}
+
+function predType($pdo, $length, $width,  $draft){
+  $pythonScript = realpath(__DIR__ . '/../assets/models/script_BC2_final.py');
+  $length = escapeshellarg($length);
+  $width = escapeshellarg($width);
+  $draft = escapeshellarg($draft);
+  $command = "python3 " . $pythonScript . " --Length " . $length . " --Width " . $width . " --Draft " . $draft;
+  $output = shell_exec($command . ' 2>&1');
+  $clusterValue = null;
+  if (is_string($output) && trim($output) !== '') {
+    if (preg_match("/Predicted VesselType:\s*\[\s*'(\d+)'\s*\]/", $output, $matches)) {
+      $clusterValue = (int)$matches[1];
+    } else {
+      $clusterValue = $output;
+    }
+  } else {
+    $clusterValue = 'Error: No output';
+  }
+  $result = $clusterValue;
+  if(!empty($result)){
+    Response::HTTP200($result);
+    exit;
+  } else{
+    Response::HTTP404(['error' => 'No data found']);
+    exit;
+  }
+}
+
+function getBoat($pdo, $MMSI){
+  $statement = $pdo->prepare('SELECT * FROM Boat WHERE MMSI = :mmsi INNER JOIN Position ON Boat.MMSI = Position.MMSI ORDER BY Boat.MMSI, Position.basedatetime;');
+  $statement->bindParam(':mmsi', $MMSI);
+  $statement->execute();
+  $result = $statement->fetchAll(PDO::FETCH_ASSOC);
+  if(!empty($result)){
+    Response::HTTP200($result);
+    exit;
+  } else{
+    Response::HTTP404(['error' => 'No data found'])
+  }
+}
+
+function getNextPred($pdo, $latitude, $longitude, $sog, $cog, $heading, $type, $length, $width, $draft, $cargo)
+  $pythonScript = realpath(__DIR__ . '/../assets/models/script_BC3_final.py')
 
 function clusterAll($pdo){
   $statement = $pdo->prepare('SELECT * FROM Boat INNER JOIN Position ON Boat.MMSI = Position.MMSI ORDER BY Boat.MMSI, Position.basedatetime;');
@@ -113,11 +168,11 @@ function clusterAll($pdo){
     foreach ($result as $row) {
       $pythonScript = realpath(__DIR__ . '/../assets/models/script_BC1_final.py');
       $latitude = escapeshellarg($row['latitude']);
-      $longitude = escapeshellarg($row['longitude']);
+Souhaite-tu gérer les deux (cluster + vessel type) dans le même script, ou c’est séparé ?      $longitude = escapeshellarg($row['longitude']);
       $sog = escapeshellarg($row['sog']);
       $cog = escapeshellarg($row['cog']);
       $heading = escapeshellarg($row['heading']);
-      $command = "python " . $pythonScript . " --LAT " . $latitude . " --LON " . $longitude . " --SOG " . $sog . " --COG " . $cog . " --Heading " . $heading;
+      $command = "python3 " . $pythonScript . " --LAT " . $latitude . " --LON " . $longitude . " --SOG " . $sog . " --COG " . $cog . " --Heading " . $heading;
       $output = shell_exec($command . ' 2>&1');
       $clusterValue = null;
       if (is_string($output) && trim($output) !== '') {
@@ -144,15 +199,3 @@ function clusterAll($pdo){
 
 
 
-function getUser($db, $id){
-    $query = $db->prepare('SELECT * FROM Users WHERE id_user = :id_user');
-    $query->execute(array(':id_user' => $id));
-    $result = $query->fetch(PDO::FETCH_ASSOC);
-    if(!empty($result)){
-      Response::HTTP200($result);
-      exit;
-    } else{
-      Response::HTTP404(['error' => 'No data found']);
-      exit;
-    }
-}
