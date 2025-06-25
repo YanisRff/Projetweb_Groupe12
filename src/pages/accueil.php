@@ -8,14 +8,17 @@
     <script src="assets/js/accueil.js"></script>
 </head>
 <body>
+
   <header class="rectangle_haut">
     <div id="linkTo">
       <a class="haut_page" href="/">Accueil</a>
       <a class ="haut_page"href="/addData">Ajout</a>
       <a class="haut_page" href="/carte">Carte</a>
+      <a class="haut_page" href="/cluster">Cluster</a>
       <haut_page></haut_page>
     </div>
   </header>
+
   <div id="middle ">
     <div class="zoom">
       <tit>Gulf Traject</tit>
@@ -28,9 +31,22 @@
   <txt>Explorez avec nous chaque étape de la création web, du maquettage à l’interface dynamique, en passant par l’intégration HTML/CSS, la gestion des échanges asynchrones avec AJAX, et le traitement des données serveur en PHP — le tout appliqué à un jeu de données issu du domaine maritime.</txt>
   </div>
 
-  <div class="rectangle_bas"></div>
-  <div class="ligne"></div>
+  
 
+ 
+  
+    <footer class="rectangle_bas" >
+      <div id="tab_bas">
+      <a class="bas_page">Ressources</a>
+      <a class="bas_page">Explore</a>
+      <a class="bas_page">Graphic Chart</a>
+      <a class="bas_page"></a>  
+      </div>
+  </footer>
+
+
+  
+  
   <?php
 
 
