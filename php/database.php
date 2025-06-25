@@ -151,7 +151,7 @@ function getBoat($pdo, $MMSI){
     Response::HTTP200($result);
     exit;
   } else{
-    Response::HTTP404(['error' => 'No data found'])
+    Response::HTTP404(['error' => 'No data found']);
   }
 }
 
