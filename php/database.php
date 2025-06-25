@@ -169,7 +169,7 @@ function clusterAll($pdo){
     foreach ($result as $row) {
       $pythonScript = realpath(__DIR__ . '/../assets/models/script_BC1_final.py');
       $latitude = escapeshellarg($row['latitude']);
-Souhaite-tu gérer les deux (cluster + vessel type) dans le même script, ou c’est séparé ?      $longitude = escapeshellarg($row['longitude']);
+      $longitude = escapeshellarg($row['longitude']);
       $sog = escapeshellarg($row['sog']);
       $cog = escapeshellarg($row['cog']);
       $heading = escapeshellarg($row['heading']);
