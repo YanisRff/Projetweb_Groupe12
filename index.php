@@ -21,6 +21,9 @@ switch ($path) {
     case '/cluster':
         require 'src/pages/cluster.php';
         break;
+    case '/traj':
+        require 'src/pages/traj.php';
+        break;
     default:
         http_response_code(404);
         require 'src/pages/404.php';

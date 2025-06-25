@@ -1,0 +1,133 @@
+body{
+    background-image: url('../images/groupe_better.jpg');
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-position: 50% 0%;
+
+    margin: 0;
+    padding: 0;
+    width: 100%;
+    height: 100%;
+    overflow: hidden;
+}
+
+.rectangle_haut{
+  height: 6%;
+  z-index: 1000;
+  width: 100%;
+  position: fixed;
+  top: 0%;  
+  left: 0%;
+  background-color: #F4F2F3;
+}
+
+.rectangle_bas{
+  height: 14%;
+  z-index: 1000;
+  width: 100%;
+  position: fixed;
+  bottom : 0%;
+  left: 0%;
+  background-color: #F4F2F4;
+}
+
+p{
+    font-family: Krona One, sans-serif;
+}
+.zoom{
+  max-width: 100%;
+  max-height: 100%;
+}
+.zoom:hover{
+  transition: transform 0.6s ease;
+  transform: scale(1.2)
+}
+
+
+
+tit{
+    color : #F4F2F3;
+    text-decoration: underline;
+    text-decoration-thickness: 7px;
+    text-underline-offset: 8px;
+    text-decoration-style: inherit;
+    font-size: 4em;
+    font-family: sans-serif;
+    font-weight: bold;
+    text-transform: uppercase;
+    letter-spacing: 0.25em;
+    margin-top: 15%;
+    align-items: center;
+    display: flex;
+    justify-content: center;
+}
+
+
+sub_tit{
+   color : #F4F2F3;
+    font-size: 2em;
+    font-family: sans-serif;
+    font-weight: bold;
+    letter-spacing: 0.2em;
+    align-items: center;
+    display: flex;
+    justify-content: center;
+}
+
+who{
+    font-size: 1em;
+    font-family: sans-serif;
+    font-weight: bold;
+    color:#F4F2F3;
+    letter-spacing: 0.1em;
+    position: fixed;
+    left: 6%;
+    top: 53%
+}
+
+txt{
+    font-size: 0.8em;
+    font-family: sans-serif;
+    color:#F4F2F3;
+    letter-spacing: 0.1em;
+    position: fixed;
+    left: 6%;
+    right: 12%;
+    top: 57%;
+    width : 20%;
+    text-align: justify;
+}
+
+
+.haut_page{
+    text-align: center;
+    align-items: center;
+    align-content: center;
+    alignment-baseline: center;
+    color : #868686;
+    font-size: 1.5em;
+    font-family: sans-serif;
+    font-weight: bold;
+    letter-spacing: 0.2em;
+    margin-left: 5%;
+    margin-right: 5%;
+    margin-top: 1.5%;
+    transition: transform 0.6s ease;
+}
+
+.haut_page:hover{
+  transform: scale(1.2);
+  color: #292929;
+}
+
+#linkTo{
+  display: grid;
+  align-content: center;
+  grid-template-columns: repeat(3, 0.2fr); 
+  justify-content: center;
+}
+
+#middle{
+  display: flex;
+  flex-direction: column;
+}   
