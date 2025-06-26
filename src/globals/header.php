@@ -1,14 +1,10 @@
-<header>
-        <a href="/">
-        <img src="assets/images/logo@small.png" alt="logo">
-        <div class="title">
-            <h1>GulfTraject</h1>
+<header class="rectangle_haut">
+        <a id="baba" href="/"><img  class="logo_bateau" src="assets/images/logo_complet.png" alt="Logo Complet"></a>
+        <a id="tit" class="classic" href="/">Gulf Traject</a>
+        <a class="classic" href="/">Accueil</a>
+        <a class="classic" href="/addData">Ajout</a>
+        <a class="classic" href="/Carte">Carte</a>
+        <div id="contact">
+        <a id="bt" class="classic" class="btn btn-primary" href="https://www.instagram.com/p/CeJtdqGs7q070ibq5hJH0uuae1BGvcnSQpVYjU0/?img_index=10">Nous contacter</a>
         </div>
-
-        </a>
-        <div id="linkTo">
-            <a href="/">Accueil</a>
-            <a href="/addData">Ajout</a>
-            <a href="/carte">Carte</a>
-        </div>
-</header>
+    </header>
