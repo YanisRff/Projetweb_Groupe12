@@ -1,4 +1,6 @@
 <?php
+ini_set('memory_limit', '1024M');
+
 require_once('constants.php');
 require_once('Routeur/response.php');
 
@@ -143,7 +145,13 @@ function predType($pdo, $length, $width,  $draft){
 }
 
 function getBoat($pdo, $MMSI){
-  $statement = $pdo->prepare('SELECT * FROM Boat WHERE MMSI = :mmsi INNER JOIN Position ON Boat.MMSI = Position.MMSI ORDER BY Boat.MMSI, Position.basedatetime;');
+  $statement = $pdo->prepare(
+    'SELECT * 
+     FROM Boat 
+     INNER JOIN Position ON Boat.MMSI = Position.MMSI 
+     WHERE Boat.MMSI = :mmsi 
+     ORDER BY Boat.MMSI, Position.basedatetime;'
+  );
   $statement->bindParam(':mmsi', $MMSI);
   $statement->execute();
   $result = $statement->fetchAll(PDO::FETCH_ASSOC);
@@ -157,16 +165,68 @@ function getBoat($pdo, $MMSI){
 
 function getNextPred($pdo, $latitude, $longitude, $sog, $cog, $heading, $type, $length, $width, $draft, $cargo){
   $pythonScript = realpath(__DIR__ . '/../assets/models/script_BC3_final.py');
+  $latitude = escapeshellarg($latitude);
+  $longitude = escapeshellarg($longitude);
+  $sog = escapeshellarg($sog);
+  $cog = escapeshellarg($cog);
+  $heading = escapeshellarg($heading);
+  $type = escapeshellarg($type);
+  $length = escapeshellarg($length);
+  $width = escapeshellarg($width);
+  $draft = escapeshellarg($draft);
+  $cargo = escapeshellarg($cargo);
+  $command = "python3 " . $pythonScript . " --LAT " . $latitude . " --LON " . $longitude . " --SOG " . $sog . " --COG " . $cog . " --Heading " . $heading . " --VesselType " . $type . " --Length  " . $length . " --Width " . $width . " --Draft " . $draft . " --Cargo " . $cargo . " --time " . 300;
+  $output = shell_exec($command . ' 2>&1');
+  $predictedLat = null;
+  $predictedLon = null;
+  if (is_string($output) && trim($output) !== '') {
+    if (
+        preg_match('/Predicted new LAT:\s*([\-0-9\.]+)/', $output, $latMatch) &&
+        preg_match('/Predicted new LON:\s*([\-0-9\.]+)/', $output, $lonMatch)
+    ) {
+        $predictedLat = (float)$latMatch[1];
+        $predictedLon = (float)$lonMatch[1];
+    } else {
+        $predictedLat = null;
+        $predictedLon = null;
+    }
+  } else {
+    $predictedLat = null;
+    $predictedLon = null;
+  }
+  $result = [
+    'latitude' => $predictedLat,
+    'longitude' => $predictedLon
+  ];
+  if(!empty($result)){
+    Response::HTTP200($result);
+    exit;
+  } else{
+    Response::HTTP404(['error' => 'No data found']);
+    exit;
+  }
 }
 
 function clusterAll($pdo){
   $statement = $pdo->prepare('SELECT * FROM Boat INNER JOIN Position ON Boat.MMSI = Position.MMSI ORDER BY Boat.MMSI, Position.basedatetime;');
   $statement -> execute();
   $result = $statement->fetchAll(PDO::FETCH_ASSOC);
-  if(!empty($result)){
 
+  if (!empty($result)) {
     $modifiedResult = [];
+    $mmsiClusters = []; // tableau pour stocker les clusters déjà trouvés par MMSI
+
     foreach ($result as $row) {
+      $mmsi = $row['mmsi'];
+
+      // Si le MMSI a déjà une clusterValue, on la réutilise
+      if (isset($mmsiClusters[$mmsi])) {
+        $row['cluster'] = $mmsiClusters[$mmsi];
+        $modifiedResult[] = $row;
+        continue;
+      }
+
+      // Sinon, on exécute le script Python
       $pythonScript = realpath(__DIR__ . '/../assets/models/script_BC1_final.py');
       $latitude = escapeshellarg($row['latitude']);
       $longitude = escapeshellarg($row['longitude']);
@@ -175,28 +235,31 @@ function clusterAll($pdo){
       $heading = escapeshellarg($row['heading']);
       $command = "python3 " . $pythonScript . " --LAT " . $latitude . " --LON " . $longitude . " --SOG " . $sog . " --COG " . $cog . " --Heading " . $heading;
       $output = shell_exec($command . ' 2>&1');
+
       $clusterValue = null;
       if (is_string($output) && trim($output) !== '') {
         if (preg_match('/>>> Cluster prédit pour ce navire : (\d+)/', $output, $matches)) {
           $clusterValue = (int)$matches[1];
         } else {
-          error_log("Python script output did not contain expected cluster line for MMSI {$row['mmsi']}:\n" . $output);
+          error_log("Python script output did not contain expected cluster line for MMSI {$mmsi}:\n" . $output);
           $clusterValue = $output;
         }
       } else {
-        error_log("Python script returned empty or non-string output for MMSI {$row['mmsi']}: " . var_export($output, true));
+        error_log("Python script returned empty or non-string output for MMSI {$mmsi}: " . var_export($output, true));
         $clusterValue = 'Error: No output';
       }
+
+      // Stocker la valeur trouvée pour réutilisation
+      $mmsiClusters[$mmsi] = $clusterValue;
       $row['cluster'] = $clusterValue;
       $modifiedResult[] = $row;
     }
+
     Response::HTTP200($modifiedResult);
     exit;
-  } else{
+  } else {
     Response::HTTP404(['error' => 'No data found']);
     exit;
   }
 }
-
-
 
