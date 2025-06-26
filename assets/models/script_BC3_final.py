@@ -4,7 +4,7 @@ import pandas as pd
 
 if __name__ == '__main__':
     # load
-    with open('model_3.pkl', 'rb') as f:
+    with open('../assets/models/model_3.pkl', 'rb') as f:
         model = pickle.load(f)
     
     parser = argparse.ArgumentParser(description="Mon programme avec options")
