@@ -1,0 +1,38 @@
+body{
+    font-family: Arial, Helvetica, sans-serif;
+    margin: 0%;
+    height: 100%;
+    width: 100%;
+    background: linear-gradient(to right,#3d5d99, #1d2e4d);
+    color: white;
+    height: 100vh;
+    width: 100%;
+}
+
+#container{
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+}
+
+#trajMap{
+    margin-top: 10%;
+    margin-left: 0%;
+}
+
+#filter{
+    position:fixed;
+    top:15%;
+    left:47%;
+}
+
+choose{
+    font-size: 1em;
+    font-family: sans-serif;
+    font-weight: normal;
+    color:#F4F2F3;
+    letter-spacing: 0.1em;
+    position: fixed;
+    left: 37%;
+    top: 15%
+}

@@ -1,7 +1,7 @@
 .rectangle_haut{
-    display: flex;
-    align-items: center;
-    gap:10px;
+  display: flex;
+  align-items: center;
+  gap:2%;
   height: 11%;
   z-index: 1000;
   width: 100%;
@@ -54,8 +54,13 @@
     transition: transform 0.6s ease;
 }
 
-a:hover{
+.classic:hover{
   transform: scale(1.5);
+  color: #292929; 
+}
+
+a:hover{
+  transform: scale(1);
   color: #292929;
 }
 
@@ -80,7 +85,7 @@ a:hover{
 
 
 #bt{
-    margin-left: 75%;
+    margin-left: 30%;
     width:65%;
     background-color: rgb(40, 156, 172);
     border: none;
