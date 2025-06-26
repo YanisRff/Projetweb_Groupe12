@@ -239,11 +239,4 @@ docker compose stop
 docker compose down
 ```
 
-```
-
----
-
-Veux-tu que je te génère aussi un `.gitignore` adapté au projet ?  
-Ou un fichier `.env` pour faciliter la config des variables d’environnement ?
-```
 
