@@ -141,30 +141,74 @@ function printMap(rawData){
         Plotly.newPlot('fullMap', data, layout);
 }
 
+let fullData = [];
+let currentPage = 1;
+const rowsPerPage = 20;
 
-function printTable(data){
-  let table = document.getElementById('table');
-  while (table.firstChild) {
-    table.removeChild(table.firstChild);
-  }
+function printTable(data) {
+  fullData = data;
+  currentPage = 1; // reset à la première page
+  renderTablePage();
+  setupPaginationControls();
+}
+
+function renderTablePage() {
+  const table = document.getElementById('table');
+  table.innerHTML = ''; // vide le tableau
+
+  const start = (currentPage - 1) * rowsPerPage;
+  const end = start + rowsPerPage;
+  const pageData = fullData.slice(start, end);
+
+  if (pageData.length === 0) return;
+
+  // En-têtes
   let headerRow = document.createElement('tr');
-  let headers = Object.keys(data[0]);
+  let headers = Object.keys(pageData[0]);
   headers.forEach(header => {
     let th = document.createElement('th');
     th.textContent = header;
     headerRow.appendChild(th);
   });
   table.appendChild(headerRow);
-  data.forEach(data => {
+
+  // Données
+  pageData.forEach(rowData => {
     let row = document.createElement('tr');
-    Object.values(data).forEach(value => {
+    Object.values(rowData).forEach(value => {
       let td = document.createElement('td');
       td.textContent = value;
       row.appendChild(td);
     });
     table.appendChild(row);
   });
+
+  // Mise à jour de l’indicateur de page
+  const pageIndicator = document.getElementById('pageIndicator');
+  const totalPages = Math.ceil(fullData.length / rowsPerPage);
+  pageIndicator.textContent = `Page ${currentPage} / ${totalPages}`;
 }
+
+function setupPaginationControls() {
+  const prevBtn = document.getElementById('prevPage');
+  const nextBtn = document.getElementById('nextPage');
+
+  prevBtn.onclick = () => {
+    if (currentPage > 1) {
+      currentPage--;
+      renderTablePage();
+    }
+  };
+
+  nextBtn.onclick = () => {
+    const totalPages = Math.ceil(fullData.length / rowsPerPage);
+    if (currentPage < totalPages) {
+      currentPage++;
+      renderTablePage();
+    }
+  };
+}
+
 
 
 function printPage(){

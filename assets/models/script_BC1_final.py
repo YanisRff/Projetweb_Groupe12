@@ -1,3 +1,5 @@
+##Groupe 12 - Maryse, Alexandre, Yanis
+
 import pickle
 import argparse
 import pandas as pd

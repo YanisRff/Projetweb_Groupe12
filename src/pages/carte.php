@@ -24,7 +24,14 @@
         <h1>Data base : boats on the golf of mexico</h1>
         <p>Click here if you want to add a boat</p>
         <a href="/addData">Ajout</a>
-        <div id="table"></div>
+        <div id="allTable">
+          <div id="pagination-controls">
+            <button id="prevPage">Précédent</button>
+            <span id="pageIndicator"></span>
+            <button id="nextPage">Suivant</button>
+          </div>
+          <table id="table"></table>
+        </div>
       </div>
 
       <div id="predPage">
