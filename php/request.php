@@ -36,4 +36,24 @@ $router->GET('/cluster', [], function(){
   clusterAll($pdo);
 });
 
+$router->GET('/getMMSI', [], function(){
+  global $pdo;
+  getAllMMSI($pdo);
+});
+
+$router->GET('/type', ['length', 'width', 'draft'], function($length, $width, $draft){
+  global $pdo;
+  predType($pdo, $length, $width, $draft);
+});
+
+$router->GET('/getBoat', ['MMSI'], function($MMSI){
+  global $pdo;
+  getBoat($pdo, $MMSI);
+});
+
+$router->GET('/nextPred', ['latitude', 'longitude', 'sog', 'cog', 'heading', 'type', 'length', 'width', 'draft'], function($latitude, $longitude, $sog, $cog, $heading, $type, $length, $width, $draft){
+  global $pdo;
+  getNextPred($pdo, $latitude, $longitude, $sog, $cog, $heading, $type, $length, $width, $draft, $type);
+});
+
 $router->run();
