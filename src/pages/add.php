@@ -34,11 +34,11 @@
                     </div>
                     <div class="mb-3">
                         <label for="latitude" class="create-div">Latitude</label>
-                        <input type="number" min=0 step="any" class="form-control" id="latitude" name="Latitude" required>
+                        <input type="number" step="any" class="form-control" id="latitude" name="Latitude" required>
                     </div>
                     <div class="mb-3">
                         <label for="longitude" class="create-div">Longitude </label>
-                        <input type="number" min=0 step="any" class="form-control" id="longitude" name="Longitude" required>
+                        <input type="number" step="any" class="form-control" id="longitude" name="Longitude" required>
                     </div>
                     <div class="mb-3">
                         <label for="SOG" class="create-div">SOG </label>
