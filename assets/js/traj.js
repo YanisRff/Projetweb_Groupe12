@@ -34,18 +34,18 @@ function addFilter() {
 
             let talk = document.getElementById('type');
             let talking = document.createElement('h2');
-            if(parseInt(type) === 60){
+            if(type === 60){
               talking.textContent = 'Ce navire est de type : Passager (60)';
             }
-            if(type == '70'){
+            else{ if(type === 70){
               talking.textContent = 'Ce navire est de type : Cargo (70)';
             }
-            if(type == '80'){
+            else{ if(type == 80){
               talking.textContent = 'Ce navire est de type : Tanker (80)';
             }
             else{
               talking.textContent = 'Ce navire est de type : Inconnu (' + type +')';
-            }
+            }}}
             talk.appendChild(talking);
 
             printMap(data, type);
