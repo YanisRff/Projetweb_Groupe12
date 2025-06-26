@@ -6,6 +6,8 @@
     <title>GulfTraject - Ajout d'un navire</title>
 
     <link rel="stylesheet" href="assets/css/style.css">
+    <link rel="stylesheet" href="assets/css/traj.css">
+    <link rel="stylesheet" href="assets/css/header.css">
     <script src="https://cdn.plot.ly/plotly-latest.min.js"></script>
     <script src="assets/js/ajax.js"></script>
     <script src="assets/js/traj.js"></script>
@@ -16,7 +18,7 @@
   ?>
   <div id="container">
     <main>
-
+      <choose>Choose a MMSI</choose>
       <div id="filter"></div>
 
       <div id="trajMap"></div>
