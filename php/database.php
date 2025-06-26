@@ -1,4 +1,6 @@
 <?php
+ini_set('memory_limit', '1024M');
+
 require_once('constants.php');
 require_once('Routeur/response.php');
 
@@ -209,10 +211,22 @@ function clusterAll($pdo){
   $statement = $pdo->prepare('SELECT * FROM Boat INNER JOIN Position ON Boat.MMSI = Position.MMSI ORDER BY Boat.MMSI, Position.basedatetime;');
   $statement -> execute();
   $result = $statement->fetchAll(PDO::FETCH_ASSOC);
-  if(!empty($result)){
 
+  if (!empty($result)) {
     $modifiedResult = [];
+    $mmsiClusters = []; // tableau pour stocker les clusters déjà trouvés par MMSI
+
     foreach ($result as $row) {
+      $mmsi = $row['mmsi'];
+
+      // Si le MMSI a déjà une clusterValue, on la réutilise
+      if (isset($mmsiClusters[$mmsi])) {
+        $row['cluster'] = $mmsiClusters[$mmsi];
+        $modifiedResult[] = $row;
+        continue;
+      }
+
+      // Sinon, on exécute le script Python
       $pythonScript = realpath(__DIR__ . '/../assets/models/script_BC1_final.py');
       $latitude = escapeshellarg($row['latitude']);
       $longitude = escapeshellarg($row['longitude']);
@@ -221,28 +235,31 @@ function clusterAll($pdo){
       $heading = escapeshellarg($row['heading']);
       $command = "python3 " . $pythonScript . " --LAT " . $latitude . " --LON " . $longitude . " --SOG " . $sog . " --COG " . $cog . " --Heading " . $heading;
       $output = shell_exec($command . ' 2>&1');
+
       $clusterValue = null;
       if (is_string($output) && trim($output) !== '') {
         if (preg_match('/>>> Cluster prédit pour ce navire : (\d+)/', $output, $matches)) {
           $clusterValue = (int)$matches[1];
         } else {
-          error_log("Python script output did not contain expected cluster line for MMSI {$row['mmsi']}:\n" . $output);
+          error_log("Python script output did not contain expected cluster line for MMSI {$mmsi}:\n" . $output);
           $clusterValue = $output;
         }
       } else {
-        error_log("Python script returned empty or non-string output for MMSI {$row['mmsi']}: " . var_export($output, true));
+        error_log("Python script returned empty or non-string output for MMSI {$mmsi}: " . var_export($output, true));
         $clusterValue = 'Error: No output';
       }
+
+      // Stocker la valeur trouvée pour réutilisation
+      $mmsiClusters[$mmsi] = $clusterValue;
       $row['cluster'] = $clusterValue;
       $modifiedResult[] = $row;
     }
+
     Response::HTTP200($modifiedResult);
     exit;
-  } else{
+  } else {
     Response::HTTP404(['error' => 'No data found']);
     exit;
   }
 }
-
-
 
