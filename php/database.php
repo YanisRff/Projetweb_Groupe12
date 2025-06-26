@@ -143,7 +143,13 @@ function predType($pdo, $length, $width,  $draft){
 }
 
 function getBoat($pdo, $MMSI){
-  $statement = $pdo->prepare('SELECT * FROM Boat WHERE MMSI = :mmsi INNER JOIN Position ON Boat.MMSI = Position.MMSI ORDER BY Boat.MMSI, Position.basedatetime;');
+  $statement = $pdo->prepare(
+    'SELECT * 
+     FROM Boat 
+     INNER JOIN Position ON Boat.MMSI = Position.MMSI 
+     WHERE Boat.MMSI = :mmsi 
+     ORDER BY Boat.MMSI, Position.basedatetime;'
+  );
   $statement->bindParam(':mmsi', $MMSI);
   $statement->execute();
   $result = $statement->fetchAll(PDO::FETCH_ASSOC);
@@ -157,6 +163,46 @@ function getBoat($pdo, $MMSI){
 
 function getNextPred($pdo, $latitude, $longitude, $sog, $cog, $heading, $type, $length, $width, $draft, $cargo){
   $pythonScript = realpath(__DIR__ . '/../assets/models/script_BC3_final.py');
+  $latitude = escapeshellarg($latitude);
+  $longitude = escapeshellarg($longitude);
+  $sog = escapeshellarg($sog);
+  $cog = escapeshellarg($cog);
+  $heading = escapeshellarg($heading);
+  $type = escapeshellarg($type);
+  $length = escapeshellarg($length);
+  $width = escapeshellarg($width);
+  $draft = escapeshellarg($draft);
+  $cargo = escapeshellarg($cargo);
+  $command = "python3 " . $pythonScript . " --LAT " . $latitude . " --LON " . $longitude . " --SOG " . $sog . " --COG " . $cog . " --Heading " . $heading . " --VesselType " . $type . " --Length  " . $length . " --Width " . $width . " --Draft " . $draft . " --Cargo " . $cargo . " --time " . 300;
+  $output = shell_exec($command . ' 2>&1');
+  $predictedLat = null;
+  $predictedLon = null;
+  if (is_string($output) && trim($output) !== '') {
+    if (
+        preg_match('/Predicted new LAT:\s*([\-0-9\.]+)/', $output, $latMatch) &&
+        preg_match('/Predicted new LON:\s*([\-0-9\.]+)/', $output, $lonMatch)
+    ) {
+        $predictedLat = (float)$latMatch[1];
+        $predictedLon = (float)$lonMatch[1];
+    } else {
+        $predictedLat = null;
+        $predictedLon = null;
+    }
+  } else {
+    $predictedLat = null;
+    $predictedLon = null;
+  }
+  $result = [
+    'latitude' => $predictedLat,
+    'longitude' => $predictedLon
+  ];
+  if(!empty($result)){
+    Response::HTTP200($result);
+    exit;
+  } else{
+    Response::HTTP404(['error' => 'No data found']);
+    exit;
+  }
 }
 
 function clusterAll($pdo){

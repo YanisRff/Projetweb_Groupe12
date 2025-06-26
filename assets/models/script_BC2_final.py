@@ -4,9 +4,9 @@ import pandas as pd
 
 if __name__ == '__main__':
     # load
-    with open('model_2.pkl', 'rb') as f:
+    with open('../assets/models/model_2.pkl', 'rb') as f:
         model = pickle.load(f)
-    with open('scale_2.pkl', 'rb') as f:
+    with open('../assets/models/scale_2.pkl', 'rb') as f:
         Scaler = pickle.load(f)
 
     parser = argparse.ArgumentParser(description="Mon programme avec options")
