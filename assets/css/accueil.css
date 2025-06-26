@@ -13,18 +13,43 @@ body{
 
 
 
-.rectangle_bas{
-  height: 17%;
-  z-index: 1000;
+.rectangle_bas_1{
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap:5%;
+  height: 6%;
+  width: 100%;
+  position: fixed;
+  bottom : 6%;
+  left: 0%;
+  background-color: #F4F2F3;
+}
+
+.rectangle_bas_2{
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap:5%;
+  height: 3%;
+  width: 100%;
+  position: fixed;
+  bottom : 3%;
+  left: 0%;
+  background-color: #F4F2F3;
+}
+
+.rectangle_bas_3{
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap:5%;
+  height: 3%;
   width: 100%;
   position: fixed;
   bottom : 0%;
   left: 0%;
-  background-color: #F4F2F4;
-}
-
-p{
-    font-family: Krona One, sans-serif;
+  background-color: #F4F2F3;
 }
 .zoom{
   transition: transform 0.6s ease;
@@ -88,42 +113,64 @@ txt{
     text-align: justify;
 }
 
+.logo_isen{
+  position: fixed;
+  left: 50%;
+  top:50%;
+  height: auto;
+  border: 2px solid black;
+}
 
 
 
 
 
-.bas_page{
-    text-align: center;
+
+.bas_page_tit{
+    display:flex;
     align-items: center;
-    align-content: center;
-    alignment-baseline: center;
+    justify-content: center;
+    height : 80%;
+    width: 16%;
     color : #868686;
     font-size: 1.5em;
     font-family: sans-serif;
     font-weight: bold;
-    letter-spacing: 0.2em;
-    margin-left: 5%;
-    margin-right: 5%;
-    margin-top: 0%;
+    letter-spacing: 0.25em;
     transition: transform 0.6s ease;
     text-decoration: none;
 }
 
-.bas_page:hover{
-  transform: scale(1.2);
+.bas_page_tit:hover{
+  transform: scale(1);
   color: #292929;
 }
 
-#tab_bas{
-  display: grid;
-  align-content: center;
-  grid-template-columns: repeat(4, 0.2fr); 
-  justify-content: center;  
+.bas_page_sub{
+    display:flex;
+    align-items: center;
+    justify-content: center;
+    height : 80%;
+    width: 16%;
+    font-weight: bold;
+    color : #868686;
+    font-size: 0.9em;
+    font-family: sans-serif;
+    letter-spacing: 0.25em;
+    transition: transform 0.6s ease;
+    text-decoration: none;
 }
 
 
+#isen{
+    position: fixed;
+  left:85%;
+  top:90%;
+}
 
+#isen:hover{
+  transform: scale(1);
+}
 
 
 
@@ -138,7 +185,7 @@ txt{
   z-index: 1500;
 }
 
-.logo_insta{
+.logo_isen{
   z-index: 1500;
   max-height: 10%;
   width: auto;

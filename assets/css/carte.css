@@ -19,14 +19,15 @@ body{
 }
 main{/* carte+contenu*/
     flex: 1;
+    margin-top: 8%;
     display: flex;
     flex-direction: column;
 }
 #fullMap{/*partie haute*/
-    height: 70vh;
+    height: 40%;
     width: 100%;
     background-color: lightgray;
-    border-bottom: 0.5vh solid black;
+    border-bottom: 10% solid black;
     box-sizing: border-box;
 }
 #Alltable{/*partie basse*/
@@ -47,7 +48,7 @@ main{/* carte+contenu*/
 #Alltable a[href="/addData"]{
     display: inline-block;
     background-color: rgb(207, 182, 41);
-    color: black;
+    color: white;
     padding: 0.6vh 2vw;
     margin-bottom: 2vh;
     border-radius: 1vw;
@@ -95,6 +96,14 @@ main{/* carte+contenu*/
     padding: 1vh 2vw;
 }
 
+#predPage:hover{
+    transform:scale(1);
+}
+
+a:hover{
+  transform: scale(1);
+  color: #292929;
+}
 
 
 
