@@ -11,18 +11,10 @@ body{
     overflow: hidden;
 }
 
-.rectangle_haut{
-  height: 6%;
-  z-index: 1000;
-  width: 100%;
-  position: fixed;
-  top: 0%;  
-  left: 0%;
-  background-color: #F4F2F3;
-}
+
 
 .rectangle_bas{
-  height: 14%;
+  height: 17%;
   z-index: 1000;
   width: 100%;
   position: fixed;
@@ -35,15 +27,13 @@ p{
     font-family: Krona One, sans-serif;
 }
 .zoom{
+  transition: transform 0.6s ease;
   max-width: 100%;
   max-height: 100%;
 }
 .zoom:hover{
-  transition: transform 0.6s ease;
   transform: scale(1.2)
 }
-
-
 
 tit{
     color : #F4F2F3;
@@ -99,7 +89,11 @@ txt{
 }
 
 
-.haut_page{
+
+
+
+
+.bas_page{
     text-align: center;
     align-items: center;
     align-content: center;
@@ -111,23 +105,41 @@ txt{
     letter-spacing: 0.2em;
     margin-left: 5%;
     margin-right: 5%;
-    margin-top: 1.5%;
+    margin-top: 0%;
     transition: transform 0.6s ease;
+    text-decoration: none;
 }
 
-.haut_page:hover{
+.bas_page:hover{
   transform: scale(1.2);
   color: #292929;
 }
 
-#linkTo{
+#tab_bas{
   display: grid;
   align-content: center;
-  grid-template-columns: repeat(3, 0.2fr); 
-  justify-content: center;
+  grid-template-columns: repeat(4, 0.2fr); 
+  justify-content: center;  
 }
+
+
+
+
+
 
 #middle{
   display: flex;
   flex-direction: column;
 }   
+
+.logo_bat{
+  max-width: 35%; 
+  height: auto;
+  z-index: 1500;
+}
+
+.logo_insta{
+  z-index: 1500;
+  max-height: 10%;
+  width: auto;
+}

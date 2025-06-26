@@ -1,0 +1,101 @@
+.rectangle_haut{
+    display: flex;
+    align-items: center;
+    gap:10px;
+  height: 11%;
+  z-index: 1000;
+  width: 100%;
+  position: fixed;
+  top: 0%;  
+  left: 0%;
+  background-color: #F4F2F3;
+}
+
+.logo_bateau{
+  margin-left: 30%;
+  max-width: 80%; 
+  height: auto;
+  z-index: 1500;
+  border-radius: 30%;
+  border: 2px solid black;
+}
+
+#tit{
+    display:flex;
+    align-items: center;
+    justify-content: flex-start;
+    width: 25%;
+    margin-right: 3%;
+    color : #868686;
+    z-index: 1000;
+    text-decoration-thickness: 7px;
+    text-underline-offset: 8px;
+    text-decoration-style: inherit;
+    font-size: 2em;
+    font-family: sans-serif;
+    font-weight: bold;
+    text-transform: uppercase;
+    letter-spacing: 0.25em;
+}
+
+.classic{
+    display:flex;
+    align-items: center;
+    justify-content: center;
+    height : 53.7%;
+    width: 12%;
+    color : #868686;
+    text-decoration: none;
+    font-size: 1.5em;
+    font-family: sans-serif;
+    font-weight: none;
+    text-transform: uppercase;
+    letter-spacing: 0.25em;
+    transition: transform 0.6s ease;
+}
+
+a:hover{
+  transform: scale(1.5);
+  color: #292929;
+}
+
+#tit:hover{
+    transform: scale(1);
+  color: #292929;
+}
+
+#baba{
+    display:flex;
+    justify-content: flex-end;
+    align-items: center;
+    height : 53.7%;
+    width: 6%;
+}
+
+#baba:hover{
+    transform:scale(1);
+}
+
+
+
+
+#bt{
+    margin-left: 75%;
+    width:65%;
+    background-color: rgb(40, 156, 172);
+    border: none;
+    border-radius: 10px;
+    color: white;
+    padding: 10px 40px;
+
+    text-decoration: none;
+    font-size: 0.75em;
+    font-family: sans-serif;
+    font-weight: none;
+    letter-spacing: 0.05em;
+    transition: transform 0.6s ease;
+}
+
+#bt:hover{
+    transform:scale(1);
+}
