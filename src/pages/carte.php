@@ -5,7 +5,7 @@
     
     <title>GulfTraject - Ajout d'un navire</title>
 
-    <link rel="stylesheet" href="assets/css/style.css">
+    <link rel="stylesheet" href="assets/css/carte.css">
     <script src="https://cdn.plot.ly/plotly-latest.min.js"></script>
     <script src="assets/js/ajax.js"></script>
     <script src="assets/js/carte.js"></script>
