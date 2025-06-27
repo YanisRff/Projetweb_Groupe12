@@ -113,19 +113,6 @@ txt{
     text-align: justify;
 }
 
-.logo_isen{
-  position: fixed;
-  left: 50%;
-  top:50%;
-  height: auto;
-  border: 2px solid black;
-}
-
-
-
-
-
-
 .bas_page_tit{
     display:flex;
     align-items: center;
@@ -162,17 +149,13 @@ txt{
 }
 
 
-#isen{
-    position: fixed;
-  left:85%;
-  top:90%;
-}
-
 #isen:hover{
   transform: scale(1);
 }
 
-
+#git:hover{
+  transform: scale(1);
+}
 
 #middle{
   display: flex;
@@ -186,7 +169,85 @@ txt{
 }
 
 .logo_isen{
-  z-index: 1500;
-  max-height: 10%;
-  width: auto;
+  position: fixed;
+  top: 87.5%;
+  left: 2%;
+  max-width: 8%;
+  height: auto;
+  z-index: 1000;
+}
+
+.git_BD{
+  position: fixed;
+  top: 89%;
+  left: 90%;
+  max-width: 1.7%;
+  height: auto;
+  z-index: 1000;
+}
+
+.git_IA{
+  position: fixed;
+  top: 92.5%;
+  left: 90%;
+  max-width: 1.7%;
+  height: auto;
+  z-index: 1000;
+}
+
+.git_WEB{
+  position: fixed;
+  top: 96%;
+  left: 90%;
+  max-width: 1.7%;
+  height: auto;
+  z-index: 1000;
+}
+
+.Big_Data{
+  transform: scale(1);
+  position: fixed;
+  text-decoration: none;  
+  top: 89.75%;
+  left: 92.5%;
+  max-width: 8%;
+  height: auto;
+  z-index: 1000;
+  font-weight: bold;
+    color : black;
+    font-size: 0.8em;
+    font-family: sans-serif;
+    letter-spacing: 0.25em;
+}
+
+.IA{
+  transform: scale(1);
+  position: fixed;
+  text-decoration: none;
+  top: 93.25%;
+  left: 92.5%;
+  max-width: 8%;
+  height: auto;
+  z-index: 1000;
+  font-weight: bold;
+    color : black;
+    font-size: 0.8em;
+    font-family: sans-serif;
+    letter-spacing: 0.25em;
+}
+
+.WEB{
+  transform: scale(1);
+  position: fixed;
+  text-decoration: none;
+  top: 96.75%;
+  left: 92.5%;
+  max-width: 8%;
+  height: auto;
+  z-index: 1000;
+  font-weight: bold;
+    color : black;
+    font-size: 0.8em;
+    font-family: sans-serif;
+    letter-spacing: 0.25em;
 }

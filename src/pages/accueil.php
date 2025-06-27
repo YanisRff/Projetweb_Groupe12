@@ -2,7 +2,7 @@
 <html lang="fr">
 <head>
     <meta charset="UTF-8">
-    <title> - Accueil</title>
+    <title>GulfTraject - Accueil</title>
     <link rel="stylesheet" href="assets/css/accueil.css">
     <link rel="stylesheet" href="assets/css/header.css">
     <script src="assets/js/ajax.js"></script>
@@ -27,19 +27,25 @@
   </div>
 
   <footer>
-  <a id="isen" href="https://isen-ouest.fr/"><img  class="logo_isen" src="assets/images/logo_isen_png.png" alt="Logo ISEN"></a>
+  <a id="isen" href="https://isen-ouest.fr/" target="_blank"><img  class="logo_isen" src="assets/images/logo_isen_png.png" alt="Logo ISEN"></a>
+  <a id = "git" href="https://github.com/YanisRff/Projet_BigData" target="blank"><img class="git_BD" src="assets/images/logo_git.png" alt="Logo Git"></a>
+  <a id = "git"  href="https://github.com/YanisRff/Projet_IA" target="blank"><img class="git_IA" src="assets/images/logo_git.png" alt="Logo Git"></a>
+  <a id = "git" href="https://github.com/YanisRff/Projetweb_Groupe12" target="blank"><img class="git_WEB" src="assets/images/logo_git.png" alt="Logo Git"></a>
+  <a class="Big_Data" href="https://github.com/YanisRff/Projet_BigData" target="blank">Big Data</a>
+  <a class="IA" href="https://github.com/YanisRff/Projet_IA" target="blank">IA</a>
+  <a class="WEB" href="https://github.com/YanisRff/Projetweb_Groupe12" target="blank">WEB</a>
     <div class="rectangle_bas_1">
       <a class="bas_page_tit">Ressources</a>
       <a class="bas_page_tit">Explore</a>
       <a class="bas_page_tit">References</a>
     </div>
     <div class="rectangle_bas_2">
-      <a class="bas_page_sub" >Our Database</a>
+      <a class="bas_page_sub" href="assets/py/data_clean.csv" download="DataBase_Gulf_Traject" >Our Database</a>
       <a class="bas_page_sub" href="https://www.revenue.ie/en/online-services/support/software-developers/documents/ais/ais-codelists.pdf" target="_blank">AIS Documentation</a>
       <a class="bas_page_sub">Graphic Chart</a>
     </div>
     <div class="rectangle_bas_3">
-      <a class="bas_page_sub">MCD</a>
+      <a class="bas_page_sub" href="assets/rendu/MCD.pdf" download="MCD_Gulf_Traject">MCD</a>
       <a class="bas_page_sub" href="https://www.marinetraffic.com/fr/ais/home/centerx:-87.4/centery:25.2/zoom:6" target="_blank">Marine Traffic</a>
       <a class="bas_page_sub" href="https://coolors.co/1d3461-1f487e-cca43b-f4f2f3" target="_blank">For more colors</a>
     </div>
