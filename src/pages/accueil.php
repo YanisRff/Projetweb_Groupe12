@@ -40,7 +40,7 @@
       <a class="bas_page_tit" id="Ref">References</a>
       <a class="bas_page_sub" id="DB" href="assets/py/data_clean.csv" download="DataBase_Gulf_Traject" >Our Database</a>
       <a class="bas_page_sub" id="AIS" href="https://www.revenue.ie/en/online-services/support/software-developers/documents/ais/ais-codelists.pdf" target="_blank">AIS Documentation</a>
-      <a class="bas_page_sub" id="Graph" >Graphic Chart</a>
+      <a class="bas_page_sub" id="Graph" href="assets/rendu/CharteGraphique.pdf" download="CharteGraphique_Gulf_Traject" >Graphic Chart</a>
       <a class="bas_page_sub" id="MCD" href="assets/rendu/MCD.pdf" download="MCD_Gulf_Traject">MCD</a>
       <a class="bas_page_sub" id="Traf" href="https://www.marinetraffic.com/fr/ais/home/centerx:-87.4/centery:25.2/zoom:6" target="_blank">Marine Traffic</a>
       <a class="bas_page_sub" id="col" href="https://coolors.co/1d3461-1f487e-cca43b-f4f2f3" target="_blank">For more colors</a>
