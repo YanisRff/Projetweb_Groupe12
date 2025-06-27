@@ -2,7 +2,7 @@
 <html lang="fr">
 <head>
     <meta charset="UTF-8">
-    <title> - Accueil</title>
+    <title>GulfTraject - Accueil</title>
     <link rel="stylesheet" href="assets/css/accueil.css">
     <link rel="stylesheet" href="assets/css/header.css">
     <script src="assets/js/ajax.js"></script>

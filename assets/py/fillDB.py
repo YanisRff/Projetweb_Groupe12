@@ -100,4 +100,3 @@ cursor.close()
 conn.close()
 
 print("Tables créées et données insérées avec succès dans la base de données.")
-
