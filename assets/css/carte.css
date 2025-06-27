@@ -81,8 +81,9 @@ main{/* carte+contenu*/
 #predPage{
     display: flex;
     gap: 3vw;
-    margin-top: 3vh;
+    margin-top: -2.5%;
     flex-wrap: wrap;
+    align-items: center;
     justify-content: center;
 }
 #predPage a{
@@ -104,6 +105,38 @@ a:hover{
   transform: scale(1);
   color: #292929;
 }
+
+
+#nextPage{
+    color: white;
+    text-decoration: none;
+    font-weight: bold;
+    font-size: small;
+    background-color: rgb(207,182,41);
+    border-radius: 1vw;
+    padding: 1vh 2vw;
+    border: rgb(207, 182, 41);
+}
+
+
+#prevPage{
+    color: white;
+    text-decoration: none;
+    font-weight: bold;
+    font-size: small;
+    background-color: rgb(207,182,41);
+    border-radius: 1vw;
+    padding: 1vh 2vw;
+    border: rgb(207, 182, 41);
+}
+
+#pagination-controls{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap:2%;
+}
+
 
 
 
