@@ -10,7 +10,7 @@ function addFilter() {
     menu.id = 'menu';
     const defaultOption = document.createElement('option');
     defaultOption.value = '';
-    defaultOption.textContent = '--Choose an option--';
+    defaultOption.textContent = '--Choisir MMSI--';
     menu.appendChild(defaultOption);
     filter.appendChild(menu);
 
