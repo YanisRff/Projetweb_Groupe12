@@ -1,4 +1,5 @@
 let type = null;
+let predictionAbortController = { abort: () => {} };
 
 document.addEventListener('DOMContentLoaded', function () {
   addFilter();
@@ -15,16 +16,16 @@ function addFilter() {
     filter.appendChild(menu);
 
     menu.addEventListener('change', function () {
+      predictionAbortController.shouldAbort = true;
+      predictionAbortController = { shouldAbort: false };
       ajaxRequest('GET', './php/request.php/getBoat?MMSI=' + menu.value, function(data) {
         ajaxRequest('GET', './php/request.php/type?length=' + data[data.length - 1].length + '&width=' + data[data.length - 1].width + '&draft=' + data[data.length - 1].draft, function(response) {
             type = response;
             let initialData = data[data.length - 1];
             let mmsi = initialData.mmsi;
 
-            // Affiche la carte immédiatement
             printMap(data, type);
 
-            // Affiche le type
             let talk = document.getElementById('type');
             talk.innerHTML = '';
             let talking = document.createElement('h2');
@@ -61,6 +62,10 @@ async function makeLivePredictions(initialData, type, mmsi) {
     let currentData = { ...initialData };
 
     for (let i = 0; i < 10000; i++) {
+        if (predictionAbortController.shouldAbort) {
+            console.log("Prédiction annulée.");
+            break;
+        }
         currentData = await new Promise((resolve) => {
             ajaxRequest(
                 'GET',
@@ -74,6 +79,10 @@ async function makeLivePredictions(initialData, type, mmsi) {
                 '&width=' + currentData.width +
                 '&draft=' + currentData.draft,
                 function(response) {
+                    if (predictionAbortController.shouldAbort) {
+                        resolve(null);
+                        return;
+                    }
                     let newDataPoint = {
                         mmsi: currentData.mmsi,
                         name: currentData.name,
@@ -90,11 +99,10 @@ async function makeLivePredictions(initialData, type, mmsi) {
                         prediction: 'True'
                     };
 
-                    // Mise à jour dynamique sur la carte
                     Plotly.extendTraces('trajMap', {
                         lat: [[newDataPoint.latitude]],
                         lon: [[newDataPoint.longitude]]
-                    }, [0]); // Ligne
+                    }, [0]);
 
                     Plotly.extendTraces('trajMap', {
                         lat: [[newDataPoint.latitude]],
@@ -114,14 +122,14 @@ async function makeLivePredictions(initialData, type, mmsi) {
                             `<b>Tirant d'eau:</b> ${newDataPoint.draft} m<br>` +
                             `<b>Predict:</b> True`
                         ]]
-                    }, [1]); // Marqueur
+                    }, [1]);
 
                     resolve(newDataPoint);
                 }
             );
         });
-
-        await new Promise(r => setTimeout(r, 500)); // délai entre chaque point
+        if (!currentData) break;
+        await new Promise(r => setTimeout(r, 500));
     }
 }
 
