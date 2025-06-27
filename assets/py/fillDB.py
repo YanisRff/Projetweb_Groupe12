@@ -2,7 +2,7 @@ import csv
 import psycopg2
 
 # Configuration de la base de données
-DB_SERVER = '172.20.0.2'
+DB_SERVER = 'localhost'
 DB_PORT = '5432'
 DB_USER = 'yanis'
 DB_PASSWORD = 'a'
