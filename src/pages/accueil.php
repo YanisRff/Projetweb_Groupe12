@@ -42,7 +42,7 @@
     <div class="rectangle_bas_2">
       <a class="bas_page_sub" href="assets/py/data_clean.csv" download="DataBase_Gulf_Traject" >Our Database</a>
       <a class="bas_page_sub" href="https://www.revenue.ie/en/online-services/support/software-developers/documents/ais/ais-codelists.pdf" target="_blank">AIS Documentation</a>
-      <a class="bas_page_sub">Graphic Chart</a>
+      <a class="bas_page_sub" href="assets/rendu/CharteGraphique.pdf" download="Graphic_Chart_Gulf_Traject">Graphic Chart</a>
     </div>
     <div class="rectangle_bas_3">
       <a class="bas_page_sub" href="assets/rendu/MCD.pdf" download="MCD_Gulf_Traject">MCD</a>
