@@ -18,7 +18,7 @@
       <tit2>Gulf Traject</tit2>
       <sub_tit>look over the seas</sub_tit>
     </div>
-
+    
     <div id="weAre">
       <who>Qui sommes nous?</who>
       <txt>Explorez avec nous chaque étape de la création web, du maquettage à l’interface dynamique, en passant par l’intégration HTML/CSS, la gestion des échanges asynchrones avec AJAX, et le traitement des données serveur en PHP — le tout appliqué à un jeu de données issu du domaine maritime.</txt>
