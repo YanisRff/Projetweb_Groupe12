@@ -16,14 +16,24 @@ body{
 }
 
 #trajMap{
-    margin-top: 10%;
-    margin-left: 0%;
+    margin-top: 2%;
+    margin-left: 2%;
+    margin-right: 2%;
+}
+
+#titre{
+  margin-top: 10%;
+  margin-left: 30%;
+}
+
+#chooser{
+  display:flex;
+  margin-left: 1%;
+  justify-content: center;
 }
 
 #filter{
-    position:fixed;
-    top:15%;
-    left:47%;
+  margin-left: 1%
 }
 
 choose{
@@ -32,7 +42,8 @@ choose{
     font-weight: normal;
     color:#F4F2F3;
     letter-spacing: 0.1em;
-    position: fixed;
-    left: 37%;
-    top: 15%
+}
+
+#type{
+  margin-left: 2%
 }

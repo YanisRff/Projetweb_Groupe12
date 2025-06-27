@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     
-    <title>GulfTraject - Ajout d'un navire</title>
+    <title>GulfTraject - Visualisation</title>
 
     <link rel="stylesheet" href="assets/css/header.css">
     <link rel="stylesheet" href="assets/css/carte.css">
@@ -21,8 +21,8 @@
       <div id="fullMap"></div>
     
       <div id="Alltable">
-        <h1>Data base : boats on the golf of mexico</h1>
-        <p>Click here if you want to add a boat</p>
+        <h1>Database : Navires dans le Golf du Mexique</h1>
+        <p>Cliquez ici pour ajouter un navire </p>
         <a href="/addData">Ajout</a>
         <div id="allTable">
           <div id="pagination-controls">

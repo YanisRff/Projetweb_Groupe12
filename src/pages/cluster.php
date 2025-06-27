@@ -18,7 +18,7 @@
   ?>
   <div id="container">
     <main>
-
+      <h1 id="titre">Prédiction des clusters</h1>
       <div id="clusterMap"></div>
 
     </main>

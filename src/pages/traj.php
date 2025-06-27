@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     
-    <title>GulfTraject - Ajout d'un navire</title>
+    <title>GulfTraject - Prédiction trajet & type</title>
 
     <link rel="stylesheet" href="assets/css/style.css">
     <link rel="stylesheet" href="assets/css/traj.css">
@@ -18,9 +18,11 @@
   ?>
   <div id="container">
     <main>
-      <choose>Choose a MMSI</choose>
-      <div id="filter"></div>
-
+      <h1 id="titre">Prédiction de la trajectoire et du type</h1>
+      <div id="chooser">
+        <choose>Choisissez un MMSI </choose>
+        <div id="filter"></div>
+      </div>
       <div id="trajMap"></div>
 
       <div id="type"></div>
